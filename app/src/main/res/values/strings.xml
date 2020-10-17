@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">ChadwickSchoolMeals</string>
+    <string name="app_name2">Today Meals</string>
+    <string name="signIn">Sign In</string>
+    <string name="signUp">Sign Up</string>
+    <string name="Or">Or</string>
+    <string name="Id">Enter your ID</string>
+    <string name="Pw">Enter your PW</string>
+    <string name="findAccount">Do you forget your ID/PW?</string>
+</resources>

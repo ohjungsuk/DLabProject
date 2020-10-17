@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusableInTouchMode="true">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/chadwick_icon"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="@string/app_name2"
+        android:textColor="@color/colorblue"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:gravity="center"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <EditText
+            android:id="@+id/main_edtTv_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="30dp"
+            android:hint="@string/Id"
+            android:textColorHint="@color/colorgray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/main_edtTv_pw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="30dp"
+            android:hint="@string/Pw"
+            android:textColorHint="@color/colorgray"
+            app:layout_constraintEnd_toEndOf="@+id/main_edtTv_id"
+            app:layout_constraintStart_toStartOf="@+id/main_edtTv_id"
+            app:layout_constraintTop_toBottomOf="@+id/main_edtTv_id" />
+
+        <Button
+            android:id="@+id/main_btn_signIn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/rounding_btn_blue"
+            android:text="@string/signIn"
+            android:textColor="@android:color/white"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/main_edtTv_pw"
+            app:layout_constraintStart_toStartOf="@+id/main_edtTv_pw"
+            app:layout_constraintTop_toBottomOf="@+id/main_edtTv_pw" />
+
+        <Button
+            android:id="@+id/main_btn_forgetId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="30dp"
+            android:background="@android:color/white"
+            android:stateListAnimator="@null"
+            android:text="@string/findAccount"
+            android:textColor="@color/colorblue"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/main_btn_signIn"
+            app:layout_constraintStart_toStartOf="@+id/main_btn_signIn"
+            app:layout_constraintTop_toBottomOf="@+id/main_btn_signIn" />
+
+        <FrameLayout
+            android:id="@+id/main_frmlyout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="30dp"
+            app:layout_constraintEnd_toEndOf="@+id/main_btn_forgetId"
+            app:layout_constraintStart_toStartOf="@+id/main_btn_forgetId"
+            app:layout_constraintTop_toBottomOf="@+id/main_btn_forgetId">
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_gravity="center"
+                android:background="?attr/dividerVertical"
+                android:backgroundTint="@color/colorgray" />
+
+            <TextView
+                android:layout_width="35dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:text="@string/Or"
+                android:textColor="@color/colorgray" />
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/main_btn_makeId"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:background="@drawable/rounding_btn_lightgreen"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:text="@string/signUp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/main_frmlyout"
+            app:layout_constraintStart_toStartOf="@+id/main_frmlyout"
+            app:layout_constraintTop_toBottomOf="@+id/main_frmlyout"
+            app:layout_constraintVertical_bias="0.39" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
