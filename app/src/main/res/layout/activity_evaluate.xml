@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".EvaluateActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/evaluate_toolbar"
+        app:titleTextColor="@android:color/white"
+        app:title="Evaluate today's meal!"
+        android:background="@color/colorblue"
+        android:theme="@style/Theme.AppCompat"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
+    <TextView
+        android:id="@+id/evaluate_txt_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+        android:text="2020년 11월 17일"
+        android:textColor="@android:color/black"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/evaluate_txt_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_border"
+            android:text="Korean"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"/>
+        <TextView
+            android:id="@+id/evaluate_txt_soup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:text="된장국"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"/>
+        <TextView
+            android:id="@+id/evaluate_txt_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:text="곤드레 밥"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"/>
+        <TextView
+            android:id="@+id/evaluate_txt_sub1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:text="총각김치"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"/>
+        <TextView
+            android:id="@+id/evaluate_txt_sub2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:text="매운 갈비 찜"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"/>
+        <TextView
+            android:id="@+id/evaluate_txt_sub3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:text="멸치볶음"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"/>
+        <TextView
+            android:id="@+id/evaluate_txt_sub4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@android:color/black"
+            android:text="사과"
+            android:textSize="18sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_border"
+        android:padding="10dp"
+        android:gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="식단평"
+            android:textSize="18sp"
+            android:textColor="@color/colorblue"
+            android:textStyle="bold"/>
+
+        <Button
+            android:id="@+id/evaluate_btn_RegisterEval"
+            android:stateListAnimator="@null"
+            android:gravity="center"
+            android:layout_width="70dp"
+            android:layout_height="36dp"
+            android:background="@drawable/rounding_btn_blue_circle"
+            android:text="write"
+            android:textSize="12sp"
+            android:textColor="@android:color/white"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
+        <RatingBar
+            android:id="@+id/evaluate_ratingbar"
+            android:numStars="5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:stepSize="0.5"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:layout_marginStart="10dp"
+            android:text="3.6"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        android:backgroundTint="@color/colorblue"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recylerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:padding="10dp"
+        android:layout_weight="1">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+</LinearLayout>

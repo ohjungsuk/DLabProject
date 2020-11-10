@@ -5,6 +5,8 @@
     <color name="colorAccent">#03DAC5</color>
 
     <color name="colorblue">#1E3761</color>
+    <color name="colorlightblue">#DAE8FF</color>
     <color name="colorgray">#7F8188</color>
     <color name="colorlightgreen">#88CD38</color>
+    <color name="colorThema">#3E46E4</color>
 </resources>

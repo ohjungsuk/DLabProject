@@ -14,5 +14,9 @@
         <item name="colorAccent">@color/colorblue</item>
         <item name="colorControlNormal">@color/colorblue</item>
     </style>
+    
+    <style name="backArrow" parent="AppTheme2">
+        <item name="android:actionMenuTextColor">#FFFFFF</item>
+    </style>
 
 </resources>

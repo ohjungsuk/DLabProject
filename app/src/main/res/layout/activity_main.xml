@@ -74,21 +74,21 @@
             app:layout_constraintTop_toBottomOf="@+id/main_edtTv_pw" />
 
         <Button
-            android:id="@+id/main_btn_forgetId"
+            android:id="@+id/main_btn_makeId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="30dp"
-            android:background="@android:color/white"
+            android:background="@drawable/rounding_btn_lightgreen"
             android:stateListAnimator="@null"
-            android:text="@string/findAccount"
+            android:text="SIGN UP"
             android:textColor="@color/colorblue"
-            android:textSize="13sp"
+            android:textSize="17sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/main_btn_signIn"
-            app:layout_constraintStart_toStartOf="@+id/main_btn_signIn"
-            app:layout_constraintTop_toBottomOf="@+id/main_btn_signIn" />
+            app:layout_constraintEnd_toEndOf="@+id/main_frmlyout"
+            app:layout_constraintStart_toStartOf="@+id/main_frmlyout"
+            app:layout_constraintTop_toBottomOf="@+id/main_frmlyout" />
 
         <FrameLayout
             android:id="@+id/main_frmlyout"
@@ -97,9 +97,9 @@
             android:layout_marginStart="30dp"
             android:layout_marginTop="25dp"
             android:layout_marginEnd="30dp"
-            app:layout_constraintEnd_toEndOf="@+id/main_btn_forgetId"
-            app:layout_constraintStart_toStartOf="@+id/main_btn_forgetId"
-            app:layout_constraintTop_toBottomOf="@+id/main_btn_forgetId">
+            app:layout_constraintEnd_toEndOf="@+id/main_btn_signIn"
+            app:layout_constraintStart_toStartOf="@+id/main_btn_signIn"
+            app:layout_constraintTop_toBottomOf="@+id/main_btn_signIn">
 
             <View
                 android:id="@+id/divider"
@@ -119,21 +119,6 @@
                 android:textColor="@color/colorgray" />
         </FrameLayout>
 
-        <Button
-            android:id="@+id/main_btn_makeId"
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:background="@drawable/rounding_btn_lightgreen"
-            android:paddingStart="15dp"
-            android:paddingEnd="15dp"
-            android:text="@string/signUp"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/main_frmlyout"
-            app:layout_constraintStart_toStartOf="@+id/main_frmlyout"
-            app:layout_constraintTop_toBottomOf="@+id/main_frmlyout"
-            app:layout_constraintVertical_bias="0.39" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

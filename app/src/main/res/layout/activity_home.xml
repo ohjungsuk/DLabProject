@@ -9,40 +9,146 @@
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.Toolbar
-        app:title="toolbar"
+        android:id="@+id/home_toolbar"
+        app:titleTextColor="@android:color/white"
+        app:title="Today's Meal"
+        android:background="@color/colorblue"
+        android:theme="@style/Theme.AppCompat"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize" />
+        android:layout_height="?attr/actionBarSize"/>
 
     <LinearLayout
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:weightSum="5"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
-
-        <Button
-            android:text="prev"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"/>
-
-        <TextView
-            android:gravity="center"
-            android:text="YYYY/MM/DD"
-            android:layout_weight="3"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"/>
-
-        <Button
-            android:text="next"
+            android:background="@color/colorblue"
+            android:layout_marginBottom="338dp"/>
+        <DatePicker
+            android:id="@+id/datepicker"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"/>
+            android:background="@color/colorblue"
+            android:layout_marginBottom="338dp"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/home_btn_RegisterMeal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounding_btn_blue"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="Register Menu"
+        android:textColor="@android:color/white"
+        android:stateListAnimator="@null"
+        android:textSize="17sp"
+        android:textStyle="bold">
 
+    </Button>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:text="Korean"
+                android:textStyle="bold"
+                android:textColor="@color/colorblue"
+                android:textSize="15sp"/>
+
+            <Button
+                android:id="@+id/home_btn_gotoKoreanEvaluate"
+                android:stateListAnimator="@null"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:background="@drawable/rounding_btn_ligthblue"
+                android:layout_gravity="center_vertical"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="Evaluate"
+                android:textStyle="bold"
+                android:textColor="@color/colorblue"
+                android:textSize="11sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="International"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:textStyle="bold"
+                android:textColor="@color/colorblue"
+                android:textSize="15sp"/>
+            <Button
+                android:id="@+id/home_btn_gotoIntlEvaluate"
+                android:stateListAnimator="@null"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:background="@drawable/rounding_btn_ligthblue"
+                android:layout_gravity="center_vertical"
+                android:text="Evaluate"
+                android:textStyle="bold"
+                android:textColor="@color/colorblue"
+                android:textSize="11sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Noodle"
+                android:textStyle="bold"
+                android:textColor="@color/colorblue"
+                android:layout_gravity="center_vertical"
+                android:textSize="15sp"/>
+            <Button
+                android:id="@+id/home_btn_gotoNoodleEvaluate"
+                android:stateListAnimator="@null"
+                android:layout_width="70dp"
+                android:layout_height="36dp"
+                android:background="@drawable/rounding_btn_ligthblue"
+                android:layout_gravity="center_vertical"
+                android:text="Evaluate"
+                android:textStyle="bold"
+                android:textColor="@color/colorblue"
+                android:textSize="11sp"/>
+        </LinearLayout>
     </LinearLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
 </LinearLayout>
