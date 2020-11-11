@@ -17,7 +17,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-public class SignUpActivity extends AppCompatActivity {
+import com.dtps.chadwickschoolmeals.interfaces.SignUpActivityView;
+import com.dtps.chadwickschoolmeals.services.SignUpService;
+
+public class SignUpActivity extends AppCompatActivity implements SignUpActivityView {
 
     Button signUP_btn_done;
     Toolbar signUP_toolbar;
@@ -66,14 +69,25 @@ public class SignUpActivity extends AppCompatActivity {
         signUP_Linear_Bday = (LinearLayout)findViewById(R.id.signUP_Linear_Bday);
     }
 
+
+
     public void activityMover(){
         signUP_btn_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(State_admin == 1 || State_student ==1){
-                    Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                if(State_admin == 1 || State_student == 1){
+                    new SignUpService(SignUpActivity.this).postSignUp(
+                            signUP_edt_id.getText().toString(),
+                            signUP_edt_pw.getText().toString(),
+                            signUP_edt_name.getText().toString(),
+                            Integer.parseInt(signUP_edt_grade.getText().toString()),
+                            signUP_edt_class.getText().toString(),
+                            signUP_edt_bday.getText().toString()
+                    );
+
+//                    Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+//                    startActivity(intent);
+//                    finish();
                 }else{
                     Toast.makeText(getApplicationContext(),"소속을 선택해주세요",Toast.LENGTH_LONG).show();
                 }
@@ -177,5 +191,15 @@ public class SignUpActivity extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void validateSuccess() {
+        Toast.makeText(this, "회원가입 성공", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void validateFailure() {
+        Toast.makeText(this, "회원가입 실패", Toast.LENGTH_SHORT).show();
     }
 }
