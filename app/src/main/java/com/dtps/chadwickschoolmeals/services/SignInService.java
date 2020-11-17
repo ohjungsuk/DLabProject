@@ -20,6 +20,7 @@ public class SignInService{
 
     public static final int STUDENT = 1;
     public static final int TEACHER = 0;
+
     private final SignInActivityView mSignInActivityView;
 
     public SignInService(final SignInActivityView signInActivityView) {
@@ -34,6 +35,7 @@ public class SignInService{
                 public void onResponse(Call<SignInResponse> call, Response<SignInResponse> response) {
                     SignInResponse signInResponse = response.body();
                     mSignInActivityView.validateSuccess(signInResponse);
+                    Log.d("debug_1", "STUDENT");
                 }
 
                 @Override
@@ -47,6 +49,7 @@ public class SignInService{
                 public void onResponse(Call<SignInResponse> call, Response<SignInResponse> response) {
                     SignInResponse signInResponse = response.body();
                     mSignInActivityView.validateSuccess(signInResponse);
+                    Log.d("debug_1", "STUDENT");
                 }
 
                 @Override
