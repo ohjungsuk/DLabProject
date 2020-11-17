@@ -8,6 +8,8 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +25,8 @@ import com.dtps.chadwickschoolmeals.models.SignUpTBody;
 import com.dtps.chadwickschoolmeals.models.SignUpTResponse;
 import com.dtps.chadwickschoolmeals.services.SignUpService;
 import com.dtps.chadwickschoolmeals.services.SignUpTService;
+
+import java.util.regex.Pattern;
 
 public class SignUpActivity extends AppCompatActivity implements SignUpActivityView, SignUpTActivityView {
 
@@ -61,11 +65,26 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityV
         signUP_CBox_student = (CheckBox)findViewById(R.id.signUP_CBox_student);
         signUP_CBox_admin = (CheckBox)findViewById(R.id.signUP_CBox_admin);
         signUP_edt_id = (EditText)findViewById(R.id.signUP_edt_id);
-        signUP_edt_pw = (EditText)findViewById(R.id.signUP_edt_pw);
+        signUP_edt_id.setFilters(new InputFilter[]{
+                new InputFilter.LengthFilter(10)
+        });
+        signUP_edt_pw = (EditText)findViewById(R.id.signUP_edt_pw); // 영어,한글,특수문자
+        signUP_edt_pw.setFilters(new InputFilter[]{
+                new InputFilter.LengthFilter(19)
+        });
         signUP_edt_name = (EditText)findViewById(R.id.signUP_edt_name);
+        signUP_edt_name.setFilters(new InputFilter[]{
+                new InputFilter.LengthFilter(20)
+        });
         signUP_edt_grade = (EditText)findViewById(R.id.signUP_edt_grade);
         signUP_edt_class = (EditText)findViewById(R.id.signUP_edt_class);
-        signUP_edt_bday = (EditText)findViewById(R.id.signUP_edt_bday);
+        signUP_edt_class.setFilters(new InputFilter[]{
+                new InputFilter.AllCaps(),new InputFilter.LengthFilter(1)
+        });
+        signUP_edt_bday = (EditText)findViewById(R.id.signUP_edt_bday); // 정규식
+        signUP_edt_bday.setFilters(new InputFilter[]{
+                new InputFilter.LengthFilter(10)
+        });
         signUP_edt_adminCode = (EditText)findViewById(R.id.signUP_edt_adminCode);
         signUP_Linear_code = (LinearLayout)findViewById(R.id.signUP_Linear_code);
         signUP_Linear_grade = (LinearLayout)findViewById(R.id.signUP_Linear_grade);
@@ -88,19 +107,21 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityV
                             signUP_edt_class.getText().toString(),
                             signUP_edt_bday.getText().toString()
                     );
+                    Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
                 else if(State_admin == 1 && State_student ==0){  // 교직원 회원가입
                     if(signUP_edt_adminCode.getText().toString().equals("abcdef")){
-//                        Toast.makeText(SignUpActivity.this, signUP_edt_id.getText().toString() + "\n"
-//                                +signUP_edt_pw.getText().toString() + "\n"
-//                                +signUP_edt_name.getText().toString() + "\n"
-//                                +signUP_edt_bday.getText().toString(),Toast.LENGTH_SHORT).show();
                         new SignUpTService(SignUpActivity.this).postSignUpT(
                                 signUP_edt_id.getText().toString(),
                                 signUP_edt_pw.getText().toString(),
                                 signUP_edt_name.getText().toString(),
                                 signUP_edt_bday.getText().toString()
                         );
+                        Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
 
                 }
@@ -122,6 +143,13 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityV
                 if(isChecked){
                     State_student=1;
                     signUP_CBox_admin.setChecked(false);
+                    signUP_edt_id.getText().clear();
+                    signUP_edt_pw.getText().clear();
+                    signUP_edt_name.getText().clear();
+                    signUP_edt_grade.getText().clear();
+                    signUP_edt_class.getText().clear();
+                    signUP_edt_bday.getText().clear();
+                    signUP_edt_adminCode.getText().clear();
                     if(signUP_Linear_code.getVisibility() == compoundButton.VISIBLE){
                         signUP_Linear_code.setVisibility(compoundButton.GONE);
                     }
@@ -143,6 +171,13 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityV
                 if(isChecked){
                     State_admin=1;
                     signUP_CBox_student.setChecked(false);
+                    signUP_edt_id.getText().clear();
+                    signUP_edt_pw.getText().clear();
+                    signUP_edt_name.getText().clear();
+                    signUP_edt_grade.getText().clear();
+                    signUP_edt_class.getText().clear();
+                    signUP_edt_bday.getText().clear();
+                    signUP_edt_adminCode.getText().clear();
                     if(signUP_Linear_code.getVisibility() == compoundButton.GONE){
                         signUP_Linear_code.setVisibility(compoundButton.VISIBLE);
                     }
@@ -209,22 +244,22 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityV
 
     @Override
     public void validateSuccess() {
-        Toast.makeText(this, "학생 회원가입 성공", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "학생 회원가입 성공", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void validateFailure() {
-        Toast.makeText(this, "학생 회원가입 실패", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "회원가입 실패! 형식을 다시 확인해주세요", Toast.LENGTH_LONG).show();
     }
 
 
     @Override
     public void validateSuccess2(SignUpTResponse response) {
-        Toast.makeText(this, String.valueOf(response.getCode()), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "교직원 회원가입 성공", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void validateFailure2() {
-        Toast.makeText(this, "교직원 회원가입 실패", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "회원가입 실패! 형식을 다시 확인해주세요", Toast.LENGTH_LONG).show();
     }
 }
