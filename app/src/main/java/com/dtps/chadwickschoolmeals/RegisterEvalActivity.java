@@ -6,18 +6,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
+import android.widget.Toast;
 
-public class RegisterEvalActivity extends AppCompatActivity {
+import com.dtps.chadwickschoolmeals.interfaces.RegisterEvalActivityView;
+import com.dtps.chadwickschoolmeals.models.RegisterEvalResponse;
+import com.dtps.chadwickschoolmeals.services.RegisterEvalService;
+
+public class RegisterEvalActivity extends AppCompatActivity implements RegisterEvalActivityView {
 
     ImageButton registerEval_btn_back;
     Button registerEval_btn_done;
     RatingBar registerEval_ratingbar;
     EditText registerEval_edt_comment;
+    int mfoodIdx;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +32,10 @@ public class RegisterEvalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register_eval);
 
         setUp();
+
+        Intent intent = getIntent();
+        mfoodIdx = intent.getExtras().getInt("foodIdx");
+
         activityMover();
     }
     public void setUp(){
@@ -44,8 +55,6 @@ public class RegisterEvalActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
-                                Intent intent = new Intent(RegisterEvalActivity.this,EvaluateActivity.class);
-                                startActivity(intent);
                                 finish();
                             }
                         })
@@ -60,9 +69,15 @@ public class RegisterEvalActivity extends AppCompatActivity {
         registerEval_btn_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(RegisterEvalActivity.this, EvaluateActivity.class);
-                startActivity(intent);
-                finish();
+                Log.d("abc",String.valueOf(mfoodIdx));
+                Log.d("abc",String.valueOf(registerEval_ratingbar.getRating()));
+                Log.d("abc",registerEval_edt_comment.getText().toString());
+                new RegisterEvalService(RegisterEvalActivity.this).postRegisterEval(
+                        mfoodIdx,
+                        registerEval_ratingbar.getRating(),
+                        registerEval_edt_comment.getText().toString()
+                );
+
             }
         });
     }
@@ -75,8 +90,6 @@ public class RegisterEvalActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
-                        Intent intent = new Intent(RegisterEvalActivity.this,EvaluateActivity.class);
-                        startActivity(intent);
                         finish();
                     }
                 })
@@ -86,5 +99,38 @@ public class RegisterEvalActivity extends AppCompatActivity {
                         dialogInterface.dismiss();
                     }
                 }).show();
+    }
+
+
+
+    @Override
+    public void validateSuccess(RegisterEvalResponse response) {
+        if(response == null){
+            Toast.makeText(RegisterEvalActivity.this, "something wrong in validateSuccess", Toast.LENGTH_SHORT).show();
+        }else{
+            switch(response.getCode()){
+                case 200:
+                    Toast.makeText(RegisterEvalActivity.this, "리뷰 등록 완료", Toast.LENGTH_SHORT).show();
+                    finish();
+                    break;
+                case 400:
+                    Toast.makeText(RegisterEvalActivity.this, "리뷰 등록 실패", Toast.LENGTH_SHORT).show();
+                    break;
+                case 413:
+                    Toast.makeText(RegisterEvalActivity.this, "score를 입력해주세요", Toast.LENGTH_SHORT).show();
+                    break;
+                case 414:
+                    Toast.makeText(RegisterEvalActivity.this, "comment를 입력해주세요", Toast.LENGTH_SHORT).show();
+                    break;
+                case 461:
+                    Toast.makeText(RegisterEvalActivity.this, "중복", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public void validateFailure() {
+        Toast.makeText(RegisterEvalActivity.this, "Error", Toast.LENGTH_SHORT).show();
     }
 }
