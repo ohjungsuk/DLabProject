@@ -39,6 +39,8 @@ public class ApplicationClass extends Application {
     // Retrofit 인스턴스
     public static Retrofit retrofit;
 
+    public static int authority = -1;
+
     @Override
     public void onCreate() {
         super.onCreate();

@@ -11,7 +11,14 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import androidx.appcompat.widget.Toolbar;
+
+import com.dtps.chadwickschoolmeals.interfaces.GetMenuView;
+import com.dtps.chadwickschoolmeals.models.GetMenuResponse;
+import com.dtps.chadwickschoolmeals.services.GetMenuService;
+import com.dtps.chadwickschoolmeals.services.SignInService;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -21,8 +28,6 @@ public class HomeActivity extends AppCompatActivity {
     Button home_btn_gotoKoreanEvaluate;
     Button home_btn_gotoIntlEvaluate;
     Button home_btn_gotoNoodleEvaluate;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +40,10 @@ public class HomeActivity extends AppCompatActivity {
       //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setUp();
         activityMover();
+
+        if(ApplicationClass.authority == SignInService.STUDENT){
+            home_btn_RegisterMeal.setVisibility(View.GONE);
+        }
     }
 
     public void setUp(){
@@ -55,28 +64,34 @@ public class HomeActivity extends AppCompatActivity {
                 finish();
             }
         });
+
         home_btn_gotoKoreanEvaluate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, EvaluateActivity.class);
                 startActivity(intent);
                 finish();
+
             }
         });
+
         home_btn_gotoIntlEvaluate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, EvaluateActivity.class);
                 startActivity(intent);
                 finish();
+
             }
         });
+
         home_btn_gotoNoodleEvaluate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, EvaluateActivity.class);
                 startActivity(intent);
                 finish();
+
             }
         });
     }
@@ -99,5 +114,4 @@ public class HomeActivity extends AppCompatActivity {
                     }
                 }).show();
     }
-
 }

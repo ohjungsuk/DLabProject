@@ -10,22 +10,41 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.dtps.chadwickschoolmeals.interfaces.GetMenuView;
+import com.dtps.chadwickschoolmeals.interfaces.ReviewRetrofitInterface;
+import com.dtps.chadwickschoolmeals.interfaces.ReviewView;
+import com.dtps.chadwickschoolmeals.models.GetMenuResponse;
+import com.dtps.chadwickschoolmeals.models.GetReviewResponse;
+import com.dtps.chadwickschoolmeals.models.GetTotalReviewResponse;
+import com.dtps.chadwickschoolmeals.models.Review;
+import com.dtps.chadwickschoolmeals.services.GetMenuService;
+import com.dtps.chadwickschoolmeals.services.ReviewService;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class EvaluateActivity extends AppCompatActivity {
+import static android.view.View.GONE;
+
+public class EvaluateActivity extends AppCompatActivity implements GetMenuView, ReviewView {
 
     Button evaluate_btn_RegisterEval;
     Toolbar evaluate_toolbar;
     TextView evaluate_txt_date,evaluate_txt_menu;
     TextView evaluate_txt_soup,evaluate_txt_main,evaluate_txt_sub1,evaluate_txt_sub2;
     TextView evaluate_txt_sub3,evaluate_txt_sub4;
+    TextView evaluate_txt_rating;
     RatingBar evaluate_ratingbar;
+    ProgressBar evaluate_progressBar_menu;
+    ProgressBar evaluate_progressBar_RecyclcerView;
 
     RecyclerView mRecyclerView = null;
     Adapter mAdapter = null;
@@ -43,6 +62,10 @@ public class EvaluateActivity extends AppCompatActivity {
 
         setUp();
         activityMover();
+
+        new GetMenuService(this).getMenu("2020-07-07",1);
+        new ReviewService(this).getReview(1,"2020-07-07");
+        new ReviewService(this).getTotalReview(1,"2020-07-07");
 
         mRecyclerView = findViewById(R.id.recylerview);
 
@@ -69,6 +92,7 @@ public class EvaluateActivity extends AppCompatActivity {
 
     public void setUp(){
         evaluate_btn_RegisterEval = (Button)findViewById(R.id.evaluate_btn_RegisterEval);
+        evaluate_txt_rating = findViewById(R.id.evaluate_textview_total);
         evaluate_txt_date = (TextView)findViewById(R.id.evaluate_txt_date);
         evaluate_txt_menu = (TextView)findViewById(R.id.evaluate_txt_menu);
         evaluate_txt_soup = (TextView)findViewById(R.id.evaluate_txt_soup);
@@ -78,6 +102,8 @@ public class EvaluateActivity extends AppCompatActivity {
         evaluate_txt_sub3 = (TextView)findViewById(R.id.evaluate_txt_sub3);
         evaluate_txt_sub4 = (TextView)findViewById(R.id.evaluate_txt_sub4);
         evaluate_ratingbar = (RatingBar)findViewById(R.id.evaluate_ratingbar);
+        evaluate_progressBar_menu = (ProgressBar)findViewById(R.id.evaluate_progress_bar_menu);
+        evaluate_progressBar_RecyclcerView = (ProgressBar)findViewById(R.id.evaluate);
     }
 
     public void activityMover(){
@@ -109,5 +135,75 @@ public class EvaluateActivity extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void validateMenu(GetMenuResponse response) {
+        Toast.makeText(this, response.getMessage().toString(), Toast.LENGTH_SHORT).show();
+        evaluate_progressBar_menu.setVisibility(GONE);
+
+        evaluate_txt_soup.setVisibility(View.VISIBLE);
+        evaluate_txt_main.setVisibility(View.VISIBLE);
+        evaluate_txt_sub1.setVisibility(View.VISIBLE);
+        evaluate_txt_sub2.setVisibility(View.VISIBLE);
+        evaluate_txt_sub3.setVisibility(View.VISIBLE);
+        evaluate_txt_sub4.setVisibility(View.VISIBLE);
+
+        switch(response.getCode()){
+            case 200:
+                Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
+                setMenuToTextView(response.getResult());
+                break;
+            case 400:
+                Toast.makeText(this, "something wrong in server", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
+    public void setMenuToTextView(List<String> menu){
+        TextView[] textViews = {
+                evaluate_txt_soup,
+                evaluate_txt_main,
+                evaluate_txt_sub1,
+                evaluate_txt_sub2,
+                evaluate_txt_sub3,
+                evaluate_txt_sub4,
+        };
+        int idx = 0;
+        for(TextView tv: textViews){
+            String content = menu.get(idx);
+            if(content == null){
+                tv.setText("");
+            }else{
+                tv.setText(content);
+            }
+            idx++;
+        }
+    }
+
+    @Override
+    public void validateFailure() {
+        Toast.makeText(this, "networking error!", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void validateSuccess() {
+
+    }
+
+    @Override
+    public void validateRecyclerView(GetReviewResponse response) {
+
+    }
+
+    @Override
+    public void validateRatingBar(GetTotalReviewResponse response) {
+        Log.d("RatingBar", response.getMessage());
+//        Log.d("RatingBar", response.getTotalScore().toString());
+        Log.d("RatingBar", String.valueOf(response.getCode()));
+//        evaluate_ratingbar.setRating(new Float(totalRating));
+        Log.d("RatingBar", String.valueOf(response.getTotalScore().doubleValue()));
+        evaluate_ratingbar.setRating((float)response.getTotalScore().doubleValue());
+        evaluate_txt_rating.setText(String.valueOf((float)response.getTotalScore().doubleValue()));
     }
 }

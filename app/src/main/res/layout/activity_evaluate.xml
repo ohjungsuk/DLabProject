@@ -22,11 +22,13 @@
         android:layout_marginStart="15dp"
         android:text="2020년 11월 17일"
         android:textColor="@android:color/black"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         >
+
         <TextView
             android:id="@+id/evaluate_txt_menu"
             android:layout_width="match_parent"
@@ -38,7 +40,15 @@
             android:text="Korean"
             android:textSize="18sp"
             android:textColor="@android:color/black"/>
+
+        <ProgressBar
+            android:padding="40dp"
+            android:id="@+id/evaluate_progress_bar_menu"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"/>
+
         <TextView
+            android:visibility="gone"
             android:id="@+id/evaluate_txt_soup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,6 +59,7 @@
             android:textSize="18sp"
             android:textColor="@android:color/black"/>
         <TextView
+            android:visibility="gone"
             android:id="@+id/evaluate_txt_main"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,6 +70,7 @@
             android:textSize="18sp"
             android:textColor="@android:color/black"/>
         <TextView
+            android:visibility="gone"
             android:id="@+id/evaluate_txt_sub1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -69,6 +81,7 @@
             android:textSize="18sp"
             android:textColor="@android:color/black"/>
         <TextView
+            android:visibility="gone"
             android:id="@+id/evaluate_txt_sub2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,6 +92,7 @@
             android:textSize="18sp"
             android:textColor="@android:color/black"/>
         <TextView
+            android:visibility="gone"
             android:id="@+id/evaluate_txt_sub3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -89,6 +103,7 @@
             android:textSize="18sp"
             android:textColor="@android:color/black"/>
         <TextView
+            android:visibility="gone"
             android:id="@+id/evaluate_txt_sub4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -149,11 +164,12 @@
             style="?android:attr/ratingBarStyleIndicator"
             android:stepSize="0.5"/>
         <TextView
+            android:id="@+id/evaluate_textview_total"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:layout_marginStart="10dp"
-            android:text="3.6"
+            android:text="0.0"
             android:textColor="@android:color/black"
             android:textSize="22sp"
             android:layout_weight="1"/>
@@ -172,14 +188,21 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recylerview"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:padding="10dp"
-        android:layout_weight="1">
+        android:layout_weight="1"/>
 
-    </androidx.recyclerview.widget.RecyclerView>
+    <ProgressBar
+        android:id="@+id/evaluate"
+        android:padding="50dp"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
 
 
 </LinearLayout>

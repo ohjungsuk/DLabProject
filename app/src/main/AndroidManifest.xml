@@ -17,11 +17,13 @@
         <activity android:name=".RegisterEvalActivity" />
         <activity android:name=".EvaluateActivity" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".HomeActivity" />
+        <activity android:name=".HomeActivity"
+            android:launchMode="singleTop">
+
+        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

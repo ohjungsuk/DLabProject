@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements SignInActivityVie
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
                     sign_in_flag = SignInService.STUDENT;
+                    ApplicationClass.authority = SignInService.STUDENT;
                     if(main_cBox_teacher.isChecked()) {
                         main_cBox_teacher.setChecked(false);
                     }
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements SignInActivityVie
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
                     sign_in_flag = SignInService.TEACHER;
+                    ApplicationClass.authority = SignInService.TEACHER;
                     if(main_cBox_student.isChecked()) {
                         main_cBox_student.setChecked(false);
                     }
@@ -103,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements SignInActivityVie
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this,SignUpActivity.class);
+
                 startActivity(intent);
                 finish();
             }
