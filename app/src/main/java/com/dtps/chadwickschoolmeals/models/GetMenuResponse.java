@@ -31,7 +31,6 @@ public class GetMenuResponse {
         return isSuccess;
     }
 
-
     public Integer getCode() {
         return code;
     }
