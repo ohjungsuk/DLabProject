@@ -73,7 +73,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="15dp"
-                        android:text="2020년 11월 11일"
                         android:textColor="@color/colorblue"
                         android:textSize="14sp"
                         android:textStyle="bold" />

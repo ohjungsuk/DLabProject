@@ -13,6 +13,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import androidx.appcompat.widget.Toolbar;
 
+import com.dtps.chadwickschoolmeals.services.SignInService;
+
+import java.util.Calendar;
+
 public class HomeActivity extends AppCompatActivity {
 
     Toolbar home_toolbar;
@@ -21,7 +25,8 @@ public class HomeActivity extends AppCompatActivity {
     Button home_btn_gotoKoreanEvaluate;
     Button home_btn_gotoIntlEvaluate;
     Button home_btn_gotoNoodleEvaluate;
-
+    private int mYear,mMonth,mDate;
+    private int mmYear,mmMonth,mmDate;
 
 
     @Override
@@ -35,6 +40,24 @@ public class HomeActivity extends AppCompatActivity {
       //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setUp();
         activityMover();
+
+        if(ApplicationClass.authority == SignInService.STUDENT){
+            home_btn_RegisterMeal.setVisibility(View.GONE);
+        }
+
+        final Calendar calendar = Calendar.getInstance();
+        mYear = calendar.get(Calendar.YEAR);
+        mMonth = calendar.get(Calendar.MONTH);
+        mDate = calendar.get(Calendar.DATE);
+
+        datepicker.init(mYear, mMonth, mDate, new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker datePicker, int year, int month, int date) {
+                mYear = year;
+                mMonth = month;
+                mDate = date;
+            }
+        });
     }
 
     public void setUp(){
@@ -51,6 +74,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, RegisterMealActivity.class);
+                intent.putExtra("year",mYear);
+                intent.putExtra("month",mMonth);
+                intent.putExtra("date",mDate);
                 startActivity(intent);
                 finish();
             }

@@ -11,15 +11,27 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.dtps.chadwickschoolmeals.interfaces.RegisterMealActivityView;
+import com.dtps.chadwickschoolmeals.models.RegisterMealResponse;
+import com.dtps.chadwickschoolmeals.services.RegisterMealService;
+import com.dtps.chadwickschoolmeals.services.SignUpService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class RegisterMealActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+public class RegisterMealActivity extends AppCompatActivity implements RegisterMealActivityView {
 
     androidx.appcompat.widget.Toolbar registerMeal_toolbar;
     FloatingActionButton fab;
+    String date;
     TextView registerMeal_txt_date;
+    ArrayList koreanL = new ArrayList<String>();
+    ArrayList internationalL = new ArrayList<String>();
+    ArrayList noodleL = new ArrayList<String>();
     EditText registerMeal_edt_m1,registerMeal_edt_m2,registerMeal_edt_m3;
     EditText registerMeal_edt_m4,registerMeal_edt_m5,registerMeal_edt_m6;
     EditText registerMeal_edt_mInt1,registerMeal_edt_mInt2,registerMeal_edt_mInt3;
@@ -38,7 +50,22 @@ public class RegisterMealActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         setUp();
+
+
+        Intent intent = getIntent();
+        int nyear = intent.getExtras().getInt("year");
+        int nmonth = intent.getExtras().getInt("month");
+        int ndate = intent.getExtras().getInt("date");
+        date = ((String.format("%04d-%02d-%02d",nyear,nmonth+1,ndate)));
+
+        Toast.makeText(this, date, Toast.LENGTH_SHORT).show();
+
+        registerMeal_txt_date.setText((String.format("%4d년 %2d월 %2d일",nyear,nmonth+1,ndate)));
+
+
+
         floatingbtn();
+
     }
     public void setUp(){
         fab=(FloatingActionButton) findViewById(R.id.fab);
@@ -75,9 +102,44 @@ public class RegisterMealActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
-                                Intent intent = new Intent(RegisterMealActivity.this,HomeActivity.class);
-                                startActivity(intent);
-                                finish();
+                                koreanL.add(registerMeal_edt_m1.getText().toString());
+                                koreanL.add(registerMeal_edt_m2.getText().toString());
+                                koreanL.add(registerMeal_edt_m3.getText().toString());
+                                koreanL.add(registerMeal_edt_m4.getText().toString());
+                                koreanL.add(registerMeal_edt_m5.getText().toString());
+                                koreanL.add(registerMeal_edt_m6.getText().toString());
+
+                                internationalL.add(registerMeal_edt_mInt1.getText().toString());
+                                internationalL.add(registerMeal_edt_mInt2.getText().toString());
+                                internationalL.add(registerMeal_edt_mInt3.getText().toString());
+                                internationalL.add(registerMeal_edt_mInt4.getText().toString());
+                                internationalL.add(registerMeal_edt_mInt5.getText().toString());
+                                internationalL.add(registerMeal_edt_mInt6.getText().toString());
+
+                                noodleL.add(registerMeal_edt_mNd1.getText().toString());
+                                noodleL.add(registerMeal_edt_mNd2.getText().toString());
+                                noodleL.add(registerMeal_edt_mNd3.getText().toString());
+                                noodleL.add(registerMeal_edt_mNd4.getText().toString());
+                                noodleL.add(registerMeal_edt_mNd5.getText().toString());
+                                noodleL.add(registerMeal_edt_mNd6.getText().toString());
+                                new RegisterMealService(RegisterMealActivity.this).postKorean(
+                                        date,
+                                        1,
+                                        koreanL
+                                );
+                                new RegisterMealService(RegisterMealActivity.this).postInternational(
+                                        date,
+                                        2,
+                                        internationalL
+                                );
+                                new RegisterMealService(RegisterMealActivity.this).postNoodle(
+                                        date,
+                                        3,
+                                        noodleL
+                                );
+//                                Intent intent = new Intent(RegisterMealActivity.this,HomeActivity.class);
+//                                startActivity(intent);
+//                                finish();
                             }
                         })
                         .setNegativeButton("취소", new DialogInterface.OnClickListener() {
@@ -137,4 +199,32 @@ public class RegisterMealActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void validateSuccess(RegisterMealResponse response) {
+        if(response == null){
+            Toast.makeText(RegisterMealActivity.this, "something wrong in validateSuccess", Toast.LENGTH_SHORT).show();
+        }else{
+            switch(response.getCode()){
+                case 200:
+                    Toast.makeText(RegisterMealActivity.this, "메뉴등록 완료", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RegisterMealActivity.this,HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                    break;
+                case 400:
+                    Toast.makeText(RegisterMealActivity.this, "Type Error!", Toast.LENGTH_SHORT).show();
+                    break;
+                case 403:
+                    Toast.makeText(RegisterMealActivity.this, "인증된 사용자가 아닙니다.", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public void validateFailure() {
+        Toast.makeText(this, "메뉴 등록 실패", Toast.LENGTH_LONG).show();
+    }
+
 }
