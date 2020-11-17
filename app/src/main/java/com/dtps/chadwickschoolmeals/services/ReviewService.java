@@ -21,8 +21,7 @@ public class ReviewService {
         reviewRetrofitInterface.getReview(menuIdx, date).enqueue(new Callback<GetReviewResponse>() {
             @Override
             public void onResponse(Call<GetReviewResponse> call, Response<GetReviewResponse> response) {
-                if(response.body().getCode() == 200)
-                    reviewView.validateRecyclerView(response.body());
+                reviewView.validateRecyclerView(response.body());
             }
 
             @Override

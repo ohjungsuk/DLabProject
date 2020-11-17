@@ -51,6 +51,16 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
     Adapter mAdapter = null;
     ArrayList<RecyclerItem> mList = new ArrayList<RecyclerItem>();
 
+    int foodIdx = -1;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new GetMenuService(this).getMenu(this.date,foodIdx);
+        new ReviewService(this).getReview(foodIdx, this.date);
+        new ReviewService(this).getTotalReview(foodIdx, this.date);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,14 +77,14 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
         int year = getIntent().getExtras().getInt("year");
         int month = getIntent().getExtras().getInt("month");
         int date = getIntent().getExtras().getInt("date");
-        int foodIdx = getIntent().getExtras().getInt("foodIdx", -1);
+        foodIdx = getIntent().getExtras().getInt("foodIdx", -1);
 
         this.date = String.format("%04d-%02d-%02d",year,month+1,date);
 //        this.date = ;
 
         new GetMenuService(this).getMenu(this.date,foodIdx);
-        new ReviewService(this).getReview(foodIdx,this.date);
-        new ReviewService(this).getTotalReview(foodIdx,this.date);
+        new ReviewService(this).getReview(foodIdx, this.date);
+        new ReviewService(this).getTotalReview(foodIdx, this.date);
 
         switch (foodIdx) {
             case 1:
@@ -96,19 +106,20 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        addItem("USER","너무 맛있어요");
-        addItem("USER","국이 너무 싱거워요");
-        addItem("USER","반찬이 너무 부실해요");
-        addItem("USER","밥이 너무 질어요");
-        addItem("USER","국이 너무 싱거워요");
-        addItem("USER","국이 너무 싱거워요");
+//        addItem("USER","너무 맛있어요");
+//        addItem("USER","국이 너무 싱거워요");
+//        addItem("USER","반찬이 너무 부실해요");
+//        addItem("USER","밥이 너무 질어요");
+//        addItem("USER","국이 너무 싱거워요");
+//        addItem("USER","국이 너무 싱거워요");
     }
 
-    public void addItem(String user,String comment){
+    public void addItem(String user, String comment, Double rating){
         RecyclerItem item = new RecyclerItem();
 
         item.setUser(user);
         item.setComment(comment);
+        item.setRating(rating);
 
         mList.add(item);
     }
@@ -202,8 +213,8 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
 
         int idx = 0;
         for(String content: menu){
-            if(content == null){
-                textViews[idx].setText("");
+            if(content.equals("")){
+                textViews[idx].setText("-");
             }else{
                 textViews[idx].setText(content);
             }
@@ -223,15 +234,36 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
 
     @Override
     public void validateRecyclerView(GetReviewResponse response) {
+        evaluate_progressBar_RecyclcerView.setVisibility(GONE);
+        mRecyclerView.setVisibility(View.VISIBLE);
 
+        if(response.getCode() == 481) {
+            mAdapter.clearData();
+            mAdapter.notifyDataSetChanged();
+            return;
+        }
+
+        ArrayList<Review> reviews = (ArrayList<Review>)response.getReviewList();
+
+        if(reviews == null){
+            mAdapter.clearData();
+            mAdapter.notifyDataSetChanged();
+            return;
+
+        }else{
+            for(Review review : reviews){
+                addItem(review.getCreatedAt().toString(), review.getContent().toString(), review.getScore());
+            }
+        }
+
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void validateRatingBar(GetTotalReviewResponse response) {
-        String rating;
         if(response.getCode() == 481){
-            rating = "0";
             evaluate_ratingbar.setRating(0);
+            evaluate_txt_rating.setText("0");
             return;
         }
 
