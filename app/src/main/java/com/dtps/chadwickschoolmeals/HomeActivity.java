@@ -92,6 +92,10 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, EvaluateActivity.class);
+                intent.putExtra("year",mYear);
+                intent.putExtra("month",mMonth);
+                intent.putExtra("date",mDate);
+                intent.putExtra("foodIdx",1);
                 startActivity(intent);
                 finish();
 
@@ -102,6 +106,10 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, EvaluateActivity.class);
+                intent.putExtra("year",mYear);
+                intent.putExtra("month",mMonth);
+                intent.putExtra("date",mDate);
+                intent.putExtra("foodIdx",2);
                 startActivity(intent);
                 finish();
 
@@ -112,6 +120,10 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, EvaluateActivity.class);
+                intent.putExtra("year",mYear);
+                intent.putExtra("month",mMonth);
+                intent.putExtra("date",mDate);
+                intent.putExtra("foodIdx",3);
                 startActivity(intent);
                 finish();
 

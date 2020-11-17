@@ -45,6 +45,7 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
     RatingBar evaluate_ratingbar;
     ProgressBar evaluate_progressBar_menu;
     ProgressBar evaluate_progressBar_RecyclcerView;
+    String date;
 
     RecyclerView mRecyclerView = null;
     Adapter mAdapter = null;
@@ -63,9 +64,31 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
         setUp();
         activityMover();
 
-        new GetMenuService(this).getMenu("2020-07-07",1);
-        new ReviewService(this).getReview(1,"2020-07-07");
-        new ReviewService(this).getTotalReview(1,"2020-07-07");
+        int year = getIntent().getExtras().getInt("year");
+        int month = getIntent().getExtras().getInt("month");
+        int date = getIntent().getExtras().getInt("date");
+        int foodIdx = getIntent().getExtras().getInt("foodIdx", -1);
+
+        this.date = String.format("%04d-%02d-%02d",year,month+1,date);
+//        this.date = ;
+
+        new GetMenuService(this).getMenu(this.date,foodIdx);
+        new ReviewService(this).getReview(foodIdx,this.date);
+        new ReviewService(this).getTotalReview(foodIdx,this.date);
+
+        switch (foodIdx) {
+            case 1:
+                evaluate_txt_menu.setText("Korean");
+                break;
+            case 2:
+                evaluate_txt_menu.setText("International");
+                break;
+            case 3:
+                evaluate_txt_menu.setText("Noodles");
+                break;
+        }
+
+        evaluate_txt_date.setText(this.date);
 
         mRecyclerView = findViewById(R.id.recylerview);
 
@@ -169,13 +192,20 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
                 evaluate_txt_sub3,
                 evaluate_txt_sub4,
         };
+
+        if(menu == null){
+            for(TextView tv: textViews){
+                tv.setText("-");
+            }
+            return;
+        }
+
         int idx = 0;
-        for(TextView tv: textViews){
-            String content = menu.get(idx);
+        for(String content: menu){
             if(content == null){
-                tv.setText("");
+                textViews[idx].setText("");
             }else{
-                tv.setText(content);
+                textViews[idx].setText(content);
             }
             idx++;
         }
@@ -198,11 +228,13 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
 
     @Override
     public void validateRatingBar(GetTotalReviewResponse response) {
-        Log.d("RatingBar", response.getMessage());
-//        Log.d("RatingBar", response.getTotalScore().toString());
-        Log.d("RatingBar", String.valueOf(response.getCode()));
-//        evaluate_ratingbar.setRating(new Float(totalRating));
-        Log.d("RatingBar", String.valueOf(response.getTotalScore().doubleValue()));
+        String rating;
+        if(response.getCode() == 481){
+            rating = "0";
+            evaluate_ratingbar.setRating(0);
+            return;
+        }
+
         evaluate_ratingbar.setRating((float)response.getTotalScore().doubleValue());
         evaluate_txt_rating.setText(String.valueOf((float)response.getTotalScore().doubleValue()));
     }

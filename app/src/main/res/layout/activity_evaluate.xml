@@ -37,7 +37,7 @@
             android:gravity="center"
             android:layout_margin="10dp"
             android:background="@drawable/round_border"
-            android:text="Korean"
+            android:text="-"
             android:textSize="18sp"
             android:textColor="@android:color/black"/>
 
@@ -55,7 +55,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="7dp"
             android:layout_marginBottom="7dp"
-            android:text="된장국"
+            android:text="-"
             android:textSize="18sp"
             android:textColor="@android:color/black"/>
         <TextView
@@ -66,7 +66,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="7dp"
             android:layout_marginBottom="7dp"
-            android:text="곤드레 밥"
+            android:text="-"
             android:textSize="18sp"
             android:textColor="@android:color/black"/>
         <TextView
@@ -77,7 +77,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="7dp"
             android:layout_marginBottom="7dp"
-            android:text="총각김치"
+            android:text="-"
             android:textSize="18sp"
             android:textColor="@android:color/black"/>
         <TextView
@@ -88,7 +88,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="7dp"
             android:layout_marginBottom="7dp"
-            android:text="매운 갈비 찜"
+            android:text="-"
             android:textSize="18sp"
             android:textColor="@android:color/black"/>
         <TextView
@@ -99,7 +99,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="7dp"
             android:layout_marginBottom="7dp"
-            android:text="멸치볶음"
+            android:text="-"
             android:textSize="18sp"
             android:textColor="@android:color/black"/>
         <TextView
@@ -111,7 +111,7 @@
             android:layout_marginTop="7dp"
             android:layout_marginBottom="10dp"
             android:textColor="@android:color/black"
-            android:text="사과"
+            android:text="-"
             android:textSize="18sp"/>
     </LinearLayout>
 
