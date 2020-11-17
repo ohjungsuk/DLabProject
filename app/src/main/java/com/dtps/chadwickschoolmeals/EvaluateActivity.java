@@ -45,6 +45,7 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
     RatingBar evaluate_ratingbar;
     ProgressBar evaluate_progressBar_menu;
     ProgressBar evaluate_progressBar_RecyclcerView;
+    int mfoodIdx;
     String date;
 
     RecyclerView mRecyclerView = null;
@@ -68,6 +69,8 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
         int month = getIntent().getExtras().getInt("month");
         int date = getIntent().getExtras().getInt("date");
         int foodIdx = getIntent().getExtras().getInt("foodIdx", -1);
+
+        mfoodIdx = foodIdx;
 
         this.date = String.format("%04d-%02d-%02d",year,month+1,date);
 //        this.date = ;
@@ -134,8 +137,8 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(EvaluateActivity.this, RegisterEvalActivity.class);
+                intent.putExtra("foodIdx",mfoodIdx);
                 startActivity(intent);
-                finish();
             }
         });
     }

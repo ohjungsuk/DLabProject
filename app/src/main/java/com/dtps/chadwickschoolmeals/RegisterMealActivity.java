@@ -134,7 +134,7 @@ public class RegisterMealActivity extends AppCompatActivity implements RegisterM
                                 );
                                 new RegisterMealService(RegisterMealActivity.this).postNoodle(
                                         date,
-                                        3,
+                                        1,
                                         noodleL
                                 );
 //                                Intent intent = new Intent(RegisterMealActivity.this,HomeActivity.class);
