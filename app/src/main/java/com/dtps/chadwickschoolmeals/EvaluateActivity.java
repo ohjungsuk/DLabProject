@@ -250,7 +250,11 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
 
         }else{
             for(Review review : reviews){
-                addItem(review.getCreatedAt().toString(), review.getContent().toString(), review.getScore());
+                String getCreated = review.getCreatedAt();
+                if(getCreated == null){
+                    getCreated="";
+                }
+                addItem(getCreated, review.getContent().toString(), review.getScore());
             }
         }
 
