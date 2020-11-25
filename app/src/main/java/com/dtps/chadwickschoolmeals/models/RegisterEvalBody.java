@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class RegisterEvalBody {
-    @SerializedName("menuIdx")
+    @SerializedName("foodIdx")
     @Expose
     private int menuIdx;
     @SerializedName("score")
@@ -13,12 +13,16 @@ public class RegisterEvalBody {
     @SerializedName("content")
     @Expose
     private String content;
+    @SerializedName("date")
+    @Expose
+    private String date;
 
 
-    public RegisterEvalBody(int menuIdx, float score, String content) {
+    public RegisterEvalBody(int menuIdx, float score, String content, String date) {
         this.menuIdx = menuIdx;
         this.score = score;
         this.content = content;
+        this.date = date;
     }
 
     public int getMenuIdx() {

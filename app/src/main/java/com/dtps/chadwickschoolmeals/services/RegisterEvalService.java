@@ -22,9 +22,9 @@ public class RegisterEvalService {
         this.mRegisterEvalActivityView = mRegisterEvalActivityView;
     }
 
-    public void postRegisterEval(int menuIdx,float score,String content){
+    public void postRegisterEval(int menuIdx,float score,String content,String date){
         final RegisterEvalRetrofitInterface registerEvalRetrofitInterface = ApplicationClass.getRetrofit().create(RegisterEvalRetrofitInterface.class);
-        registerEvalRetrofitInterface.requestRegisterEval(new RegisterEvalBody(menuIdx,score,content)).enqueue(new Callback<RegisterEvalResponse>() {
+        registerEvalRetrofitInterface.requestRegisterEval(new RegisterEvalBody(menuIdx,score,content,date)).enqueue(new Callback<RegisterEvalResponse>() {
             @Override
             public void onResponse(Call<RegisterEvalResponse> call, Response<RegisterEvalResponse> response) {
                 RegisterEvalResponse registerEvalResponse = response.body();

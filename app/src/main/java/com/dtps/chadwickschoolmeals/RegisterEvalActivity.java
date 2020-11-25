@@ -25,6 +25,7 @@ public class RegisterEvalActivity extends AppCompatActivity implements RegisterE
     RatingBar registerEval_ratingbar;
     EditText registerEval_edt_comment;
     int mfoodIdx;
+    String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class RegisterEvalActivity extends AppCompatActivity implements RegisterE
 
         Intent intent = getIntent();
         mfoodIdx = intent.getExtras().getInt("foodIdx");
+        date = intent.getExtras().getString("date");
 
         activityMover();
     }
@@ -75,7 +77,8 @@ public class RegisterEvalActivity extends AppCompatActivity implements RegisterE
                 new RegisterEvalService(RegisterEvalActivity.this).postRegisterEval(
                         mfoodIdx,
                         registerEval_ratingbar.getRating(),
-                        registerEval_edt_comment.getText().toString()
+                        registerEval_edt_comment.getText().toString(),
+                        RegisterEvalActivity.this.date
                 );
 
             }

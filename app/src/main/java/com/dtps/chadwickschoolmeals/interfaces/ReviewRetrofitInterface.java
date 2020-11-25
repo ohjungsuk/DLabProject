@@ -10,8 +10,8 @@ import retrofit2.http.Query;
 
 public interface ReviewRetrofitInterface {
     @GET("review")
-    Call<GetReviewResponse> getReview(@Query("menuIdx")int idx, @Query("date") String date);
+    Call<GetReviewResponse> getReview(@Query("foodIdx")int idx, @Query("date") String date);
 
     @GET("review/total")
-    Call<GetTotalReviewResponse> getTotalReview(@Query("menuIdx")int idx, @Query("date") String date);
+    Call<GetTotalReviewResponse> getTotalReview(@Query("foodIdx")int idx, @Query("date") String date);
 }

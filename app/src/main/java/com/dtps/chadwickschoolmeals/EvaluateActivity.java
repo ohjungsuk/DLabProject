@@ -149,6 +149,7 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
             public void onClick(View view) {
                 Intent intent = new Intent(EvaluateActivity.this, RegisterEvalActivity.class);
                 intent.putExtra("foodIdx",mfoodIdx);
+                intent.putExtra("date",EvaluateActivity.this.date);
                 startActivity(intent);
             }
         });
@@ -264,13 +265,14 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
 
     @Override
     public void validateRatingBar(GetTotalReviewResponse response) {
-        if(response.getCode() == 481){
+        Log.d("validateRatingBar", String.valueOf(response.getCode()));
+
+        if(!response.getIsSuccess()){
             evaluate_ratingbar.setRating(0);
             evaluate_txt_rating.setText("0");
-            return;
+        }else {
+            evaluate_ratingbar.setRating((float) response.getTotalScore().doubleValue());
+            evaluate_txt_rating.setText(String.valueOf((float) response.getTotalScore().doubleValue()));
         }
-
-        evaluate_ratingbar.setRating((float)response.getTotalScore().doubleValue());
-        evaluate_txt_rating.setText(String.valueOf((float)response.getTotalScore().doubleValue()));
     }
 }
