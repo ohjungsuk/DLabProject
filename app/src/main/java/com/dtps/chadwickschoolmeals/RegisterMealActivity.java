@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.dtps.chadwickschoolmeals.interfaces.RegisterMealActivityView;
 import com.dtps.chadwickschoolmeals.models.RegisterMealResponse;
@@ -21,9 +20,8 @@ import com.dtps.chadwickschoolmeals.services.SignUpService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class RegisterMealActivity extends AppCompatActivity implements RegisterMealActivityView {
+public class RegisterMealActivity extends AppCompatActivity implements RegisterMealActivityView{
 
     androidx.appcompat.widget.Toolbar registerMeal_toolbar;
     FloatingActionButton fab;
@@ -134,7 +132,7 @@ public class RegisterMealActivity extends AppCompatActivity implements RegisterM
                                 );
                                 new RegisterMealService(RegisterMealActivity.this).postNoodle(
                                         date,
-                                        1,
+                                        3,
                                         noodleL
                                 );
 //                                Intent intent = new Intent(RegisterMealActivity.this,HomeActivity.class);
