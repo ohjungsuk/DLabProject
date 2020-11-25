@@ -1,5 +1,7 @@
 package com.dtps.chadwickschoolmeals.services;
 
+import android.util.Log;
+
 import com.dtps.chadwickschoolmeals.ApplicationClass;
 import com.dtps.chadwickschoolmeals.interfaces.ReviewRetrofitInterface;
 import com.dtps.chadwickschoolmeals.interfaces.ReviewView;
@@ -41,6 +43,7 @@ public class ReviewService {
 
             @Override
             public void onFailure(Call<GetTotalReviewResponse> call, Throwable t) {
+                Log.d("failure", "failure");
                 reviewView.validateSuccess();
             }
         });

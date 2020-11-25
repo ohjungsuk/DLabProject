@@ -126,8 +126,10 @@ public class RegisterEvalActivity extends AppCompatActivity implements RegisterE
                     Toast.makeText(RegisterEvalActivity.this, "comment를 입력해주세요", Toast.LENGTH_SHORT).show();
                     break;
                 case 461:
-                    Toast.makeText(RegisterEvalActivity.this, "중복", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterEvalActivity.this, "이미 리뷰를 작성하셨습니다.", Toast.LENGTH_SHORT).show();
                     break;
+                case 452:
+                    Toast.makeText(RegisterEvalActivity.this, "해당 날짜에 메뉴가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
             }
         }
     }

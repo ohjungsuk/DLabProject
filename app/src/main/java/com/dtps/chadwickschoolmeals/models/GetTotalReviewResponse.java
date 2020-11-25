@@ -7,9 +7,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class GetTotalReviewResponse {
 
-    @SerializedName("reviewTotal")
-    @Expose
-    ReviewTotal reviewTotal;
     @SerializedName("isSuccess")
     @Expose
     Boolean isSuccess;
@@ -19,13 +16,16 @@ public class GetTotalReviewResponse {
     @SerializedName("message")
     @Expose
     String message;
+    @SerializedName("reviewTotal")
+    @Expose
+    Double reviewTotal;
 
     public Double getTotalScore() {
-        return reviewTotal.totalScore;
+        return this.reviewTotal;
     }
 
     public void setTotalScore(Double totalScore) {
-        this.reviewTotal.totalScore = totalScore;
+        this.reviewTotal = totalScore;
     }
 
     public Boolean getIsSuccess() {
@@ -52,10 +52,6 @@ public class GetTotalReviewResponse {
         this.message = message;
     }
 
-    class ReviewTotal{
-        @SerializedName("totalScore")
-        @Expose
-        Double totalScore;
-    }
+
 
 }

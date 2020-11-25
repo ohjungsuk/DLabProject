@@ -83,11 +83,6 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
         mfoodIdx = foodIdx;
 
         this.date = String.format("%04d-%02d-%02d",year,month+1,date);
-//        this.date = ;
-
-        new GetMenuService(this).getMenu(this.date,foodIdx);
-        new ReviewService(this).getReview(foodIdx, this.date);
-        new ReviewService(this).getTotalReview(foodIdx, this.date);
 
         switch (foodIdx) {
             case 1:
@@ -240,9 +235,9 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
     public void validateRecyclerView(GetReviewResponse response) {
         evaluate_progressBar_RecyclcerView.setVisibility(GONE);
         mRecyclerView.setVisibility(View.VISIBLE);
+        mAdapter.clearData();
 
         if(response.getCode() == 481) {
-            mAdapter.clearData();
             mAdapter.notifyDataSetChanged();
             return;
         }
@@ -250,7 +245,6 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
         ArrayList<Review> reviews = (ArrayList<Review>)response.getReviewList();
 
         if(reviews == null){
-            mAdapter.clearData();
             mAdapter.notifyDataSetChanged();
             return;
 
@@ -270,8 +264,10 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
         if(!response.getIsSuccess()){
             evaluate_ratingbar.setRating(0);
             evaluate_txt_rating.setText("0");
+
         }else {
-            evaluate_ratingbar.setRating((float) response.getTotalScore().doubleValue());
+            evaluate_ratingbar.setRating((float)response.getTotalScore().doubleValue());
+            System.out.println(response.getTotalScore() + "totalValue\n");
             evaluate_txt_rating.setText(String.valueOf((float) response.getTotalScore().doubleValue()));
         }
     }
