@@ -28,6 +28,7 @@ import com.dtps.chadwickschoolmeals.models.GetTotalReviewResponse;
 import com.dtps.chadwickschoolmeals.models.Review;
 import com.dtps.chadwickschoolmeals.services.GetMenuService;
 import com.dtps.chadwickschoolmeals.services.ReviewService;
+import com.dtps.chadwickschoolmeals.services.SignInService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,6 +76,10 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
         setUp();
         activityMover();
 
+        if(ApplicationClass.authority == SignInService.TEACHER){
+            evaluate_btn_RegisterEval.setVisibility(View.INVISIBLE);
+        }
+
         int year = getIntent().getExtras().getInt("year");
         int month = getIntent().getExtras().getInt("month");
         int date = getIntent().getExtras().getInt("date");
@@ -102,14 +107,12 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
 
         mAdapter = new Adapter(mList);
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+   //     mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-//        addItem("USER","너무 맛있어요");
-//        addItem("USER","국이 너무 싱거워요");
-//        addItem("USER","반찬이 너무 부실해요");
-//        addItem("USER","밥이 너무 질어요");
-//        addItem("USER","국이 너무 싱거워요");
-//        addItem("USER","국이 너무 싱거워요");
     }
 
     public void addItem(String user, String comment, Double rating){
@@ -172,7 +175,7 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
 
     @Override
     public void validateMenu(GetMenuResponse response) {
-        Toast.makeText(this, response.getMessage().toString(), Toast.LENGTH_SHORT).show();
+  //      Toast.makeText(this, response.getMessage().toString(), Toast.LENGTH_SHORT).show();
         evaluate_progressBar_menu.setVisibility(GONE);
 
         evaluate_txt_soup.setVisibility(View.VISIBLE);
@@ -184,11 +187,11 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
 
         switch(response.getCode()){
             case 200:
-                Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
+  //              Toast.makeText(this, "success", Toast.LENGTH_SHORT).show();
                 setMenuToTextView(response.getResult());
                 break;
             case 400:
-                Toast.makeText(this, "something wrong in server", Toast.LENGTH_SHORT).show();
+  //              Toast.makeText(this, "something wrong in server", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -265,6 +268,9 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
     public void validateRatingBar(GetTotalReviewResponse response) {
         Log.d("validateRatingBar", String.valueOf(response.getCode()));
 
+ //       float mscore = (float) response.getTotalScore().doubleValue();
+ //       String s_score = String.valueOf(Math.round(mscore*10)/10.0);
+
         if(!response.getIsSuccess()){
             evaluate_ratingbar.setRating(0);
             evaluate_txt_rating.setText("0");
@@ -272,7 +278,7 @@ public class EvaluateActivity extends AppCompatActivity implements GetMenuView, 
         }else {
             evaluate_ratingbar.setRating((float)response.getTotalScore().doubleValue());
             System.out.println(response.getTotalScore() + "totalValue\n");
-            evaluate_txt_rating.setText(String.valueOf((float) response.getTotalScore().doubleValue()));
+            evaluate_txt_rating.setText(String.valueOf( Math.round( (float) response.getTotalScore().doubleValue()*10 )/10.0 ));
         }
     }
 }

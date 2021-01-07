@@ -112,7 +112,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityV
                     finish();
                 }
                 else if(State_admin == 1 && State_student ==0){  // 교직원 회원가입
-                    if(signUP_edt_adminCode.getText().toString().equals("abcdef")){
+                    if(signUP_edt_adminCode.getText().toString().equals("key97")){
                         new SignUpTService(SignUpActivity.this).postSignUpT(
                                 signUP_edt_id.getText().toString(),
                                 signUP_edt_pw.getText().toString(),
@@ -129,7 +129,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityV
 //                    startActivity(intent);
 //                    finish();
                 else{
-                    Toast.makeText(getApplicationContext(),"소속을 선택해주세요",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(),"Please select affiliation",Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -197,8 +197,8 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityV
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(SignUpActivity.this)
-                .setMessage("뒤로가면 내용이 저장되지 않습니다.?")
-                .setPositiveButton("계속", new DialogInterface.OnClickListener() {
+                .setMessage("If you go back, the content is not saved")
+                .setPositiveButton("continue", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
@@ -207,7 +207,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityV
                         finish();
                     }
                 })
-                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
@@ -220,8 +220,8 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityV
         switch (item.getItemId()){
             case android.R.id.home:{
                 new AlertDialog.Builder(SignUpActivity.this)
-                        .setMessage("뒤로가면 내용이 저장되지 않습니다.?")
-                        .setPositiveButton("계속", new DialogInterface.OnClickListener() {
+                        .setMessage("If you go back, the content is not saved")
+                        .setPositiveButton("continue", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
@@ -230,7 +230,7 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityV
                                 finish();
                             }
                         })
-                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
@@ -244,22 +244,22 @@ public class SignUpActivity extends AppCompatActivity implements SignUpActivityV
 
     @Override
     public void validateSuccess() {
-        Toast.makeText(this, "학생 회원가입 성공", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Student registration success", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void validateFailure() {
-        Toast.makeText(this, "회원가입 실패! 형식을 다시 확인해주세요", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Registration failed! Please check the format", Toast.LENGTH_LONG).show();
     }
 
 
     @Override
     public void validateSuccess2(SignUpTResponse response) {
-        Toast.makeText(this, "교직원 회원가입 성공", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Admin registration success", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void validateFailure2() {
-        Toast.makeText(this, "회원가입 실패! 형식을 다시 확인해주세요", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Registration failed! Please check the format", Toast.LENGTH_LONG).show();
     }
 }

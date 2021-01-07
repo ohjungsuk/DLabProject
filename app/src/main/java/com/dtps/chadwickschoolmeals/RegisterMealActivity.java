@@ -58,7 +58,7 @@ public class RegisterMealActivity extends AppCompatActivity implements RegisterM
 
         Toast.makeText(this, date, Toast.LENGTH_SHORT).show();
 
-        registerMeal_txt_date.setText((String.format("%4d년 %2d월 %2d일",nyear,nmonth+1,ndate)));
+        registerMeal_txt_date.setText((String.format("%4d-%2d-%2d",nyear,nmonth+1,ndate)));
 
 
 
@@ -95,8 +95,8 @@ public class RegisterMealActivity extends AppCompatActivity implements RegisterM
             @Override
             public void onClick(View view) {
                 new AlertDialog.Builder(RegisterMealActivity.this)
-                        .setMessage("이대로 식단을 등록하시겠습니까?")
-                        .setPositiveButton("예", new DialogInterface.OnClickListener() {
+                        .setMessage("Would you like to register your diet as it is?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
@@ -140,7 +140,7 @@ public class RegisterMealActivity extends AppCompatActivity implements RegisterM
 //                                finish();
                             }
                         })
-                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
@@ -153,8 +153,8 @@ public class RegisterMealActivity extends AppCompatActivity implements RegisterM
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(RegisterMealActivity.this)
-                .setMessage("뒤로가면 내용이 저장되지 않습니다.?")
-                .setPositiveButton("계속", new DialogInterface.OnClickListener() {
+                .setMessage("If you go back, the content is not saved")
+                .setPositiveButton("continue", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
@@ -163,7 +163,7 @@ public class RegisterMealActivity extends AppCompatActivity implements RegisterM
                         finish();
                     }
                 })
-                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
@@ -176,8 +176,8 @@ public class RegisterMealActivity extends AppCompatActivity implements RegisterM
         switch (item.getItemId()){
             case android.R.id.home:{
                 new AlertDialog.Builder(RegisterMealActivity.this)
-                        .setMessage("뒤로가면 내용이 저장되지 않습니다.?")
-                        .setPositiveButton("계속", new DialogInterface.OnClickListener() {
+                        .setMessage("If you go back, the content is not saved")
+                        .setPositiveButton("continue", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
@@ -186,7 +186,7 @@ public class RegisterMealActivity extends AppCompatActivity implements RegisterM
                                 finish();
                             }
                         })
-                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
@@ -205,7 +205,7 @@ public class RegisterMealActivity extends AppCompatActivity implements RegisterM
         }else{
             switch(response.getCode()){
                 case 200:
-                    Toast.makeText(RegisterMealActivity.this, "메뉴등록 완료", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterMealActivity.this, "Registration completed", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(RegisterMealActivity.this,HomeActivity.class);
                     startActivity(intent);
                     finish();
@@ -214,7 +214,7 @@ public class RegisterMealActivity extends AppCompatActivity implements RegisterM
                     Toast.makeText(RegisterMealActivity.this, "Type Error!", Toast.LENGTH_SHORT).show();
                     break;
                 case 403:
-                    Toast.makeText(RegisterMealActivity.this, "인증된 사용자가 아닙니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterMealActivity.this, "Not an authenticated user", Toast.LENGTH_SHORT).show();
                     break;
             }
         }
@@ -222,7 +222,7 @@ public class RegisterMealActivity extends AppCompatActivity implements RegisterM
 
     @Override
     public void validateFailure() {
-        Toast.makeText(this, "메뉴 등록 실패", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Registration failed", Toast.LENGTH_LONG).show();
     }
 
 }

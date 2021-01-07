@@ -134,15 +134,15 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(HomeActivity.this)
-                .setMessage("앱을 종료하시겠습니까?")
-                .setPositiveButton("종료", new DialogInterface.OnClickListener() {
+                .setMessage("Do you want to close the App?")
+                .setPositiveButton("exit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
                         finish();
                     }
                 })
-                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();

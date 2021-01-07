@@ -52,15 +52,15 @@ public class RegisterEvalActivity extends AppCompatActivity implements RegisterE
             @Override
             public void onClick(View view) {
                 new AlertDialog.Builder(RegisterEvalActivity.this)
-                        .setMessage("뒤로가면 내용이 저장되지 않습니다.?")
-                        .setPositiveButton("계속", new DialogInterface.OnClickListener() {
+                        .setMessage("If you go back, the content is not saved")
+                        .setPositiveButton("continue", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
                                 finish();
                             }
                         })
-                        .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.dismiss();
@@ -88,15 +88,15 @@ public class RegisterEvalActivity extends AppCompatActivity implements RegisterE
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(RegisterEvalActivity.this)
-                .setMessage("뒤로가면 내용이 저장되지 않습니다.?")
-                .setPositiveButton("계속", new DialogInterface.OnClickListener() {
+                .setMessage("If you go back, the content is not saved")
+                .setPositiveButton("continue", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
                         finish();
                     }
                 })
-                .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
@@ -113,23 +113,23 @@ public class RegisterEvalActivity extends AppCompatActivity implements RegisterE
         }else{
             switch(response.getCode()){
                 case 200:
-                    Toast.makeText(RegisterEvalActivity.this, "리뷰 등록 완료", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterEvalActivity.this, "Review registration completed", Toast.LENGTH_SHORT).show();
                     finish();
                     break;
                 case 400:
-                    Toast.makeText(RegisterEvalActivity.this, "리뷰 등록 실패", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterEvalActivity.this, "Review registration failed", Toast.LENGTH_SHORT).show();
                     break;
                 case 413:
-                    Toast.makeText(RegisterEvalActivity.this, "score를 입력해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterEvalActivity.this, "Please enter score", Toast.LENGTH_SHORT).show();
                     break;
                 case 414:
-                    Toast.makeText(RegisterEvalActivity.this, "comment를 입력해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterEvalActivity.this, "Please enter comment", Toast.LENGTH_SHORT).show();
                     break;
                 case 461:
-                    Toast.makeText(RegisterEvalActivity.this, "이미 리뷰를 작성하셨습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterEvalActivity.this, "You have already written a review", Toast.LENGTH_SHORT).show();
                     break;
                 case 452:
-                    Toast.makeText(RegisterEvalActivity.this, "해당 날짜에 메뉴가 존재하지 않습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterEvalActivity.this, "Menu doesn't exist on that date.,mㅜㅠ", Toast.LENGTH_SHORT).show();
             }
         }
     }

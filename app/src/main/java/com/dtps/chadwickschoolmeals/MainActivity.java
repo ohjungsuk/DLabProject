@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements SignInActivityVie
                             sign_in_flag
                     );
                 }else{
-                    Toast.makeText(MainActivity.this, "학생인지 선생인지 선택하세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Select your job!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements SignInActivityVie
     @Override
     public void validateSuccess(SignInResponse response) {
         if(response == null){
-            Toast.makeText(MainActivity.this, "something wrong in validateSuccess", Toast.LENGTH_SHORT).show();
+  //          Toast.makeText(MainActivity.this, "something wrong in validateSuccess", Toast.LENGTH_SHORT).show();
         }else{
             switch(response.getCode()){
                 case 200:
@@ -137,10 +137,10 @@ public class MainActivity extends AppCompatActivity implements SignInActivityVie
                     Toast.makeText(MainActivity.this, "welcome!", Toast.LENGTH_SHORT).show();
                     break;
                 case 400:
-                    Toast.makeText(MainActivity.this, "ID / PW 형식이 잘못되었습니다.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Invalid ID/PW format", Toast.LENGTH_SHORT).show();
                     break;
                 case 404:
-                    Toast.makeText(MainActivity.this, "존재하지 않는 ID / PW입니다", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "ID/PW does not exist", Toast.LENGTH_SHORT).show();
                     break;
             }
         }
